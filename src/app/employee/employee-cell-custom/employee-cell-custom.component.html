@@ -1,0 +1,6 @@
+<button type="button" [routerLink]="['/employeeDetail', data.employeeId]" class="btn btn-info btn-fill"><i
+  class="fa fa-eye"></i></button>
+<button type="button" (click)="callEditModal()" class="btn btn-warning btn-fill" style="margin-left: 8px;"><i
+  class="fa fa-pencil-square-o"></i></button>
+<button type="button" (click)="callDeleteModal()" class="btn btn-danger btn-fill" style="margin-left: 8px;"><i
+  class="fa fa-trash"></i></button>

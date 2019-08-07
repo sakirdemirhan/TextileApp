@@ -1,0 +1,91 @@
+<app-sidebar></app-sidebar>
+<div class="main-panel">
+  <app-navbar></app-navbar>
+  <div class="theme-content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-counter info">
+              <i class="fa fa-users"></i>
+              <span class="count-numbers">{{ totalEmployees }}</span>
+              <span class="count-name">Toplam Çalışan</span>
+            </div>
+          </div>
+      <div class="col-md-4">
+        <div class="card-counter primary">
+          <i class="fa fa-scissors"></i>
+          <span class="count-numbers">{{ totalCompletedItems }}</span>
+          <span class="count-name">Tamamlanmış İş</span>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card-counter danger">
+          <i class="fa fa-try"></i>
+          <span class="count-numbers">{{ totalIncomes }}</span>
+          <span class="count-name">Toplam Gelir</span>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-3">
+        <div class="card-counter success">
+          <i class="fa fa-database"></i>
+          <span class="count-numbers">6875</span>
+          <span class="count-name">Data</span>
+        </div>
+      </div> -->
+
+      
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+          <canvas
+          baseChart
+          [chartType]="'line'"
+          [datasets]="chartDataIncomesByMonths"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [colors]="myColors"
+          [legend]="true"
+          (chartClick)="onChartClick($event)">
+      </canvas>
+      </div>
+      <div *ngIf="show" class="col-md-6">
+          <canvas
+          baseChart
+          [chartType]="'line'"
+          [datasets]="chartDataItemsByMonths"
+          [labels]="chartLabels2"
+          [options]="chartOptions2"
+          [colors]="myColors2"
+          [legend]="true"
+          (chartClick)="onChartClick($event)">
+      </canvas>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div *ngIf="show" class="col-md-6">
+          <canvas baseChart
+          [data]="incomesAndExpenses"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [colors]="pieChartColors"
+          [legend]="pieChartLegend">
+        </canvas>
+      </div>
+      <div *ngIf="show" class="col-md-6">
+          <canvas baseChart
+          [data]="completedAndOnProcessItems"
+          [labels]="pieChartLabels2"
+          [chartType]="pieChartType2"
+          [options]="pieChartOptions2"
+          [colors]="pieChartColors2"
+          [legend]="pieChartLegend2">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

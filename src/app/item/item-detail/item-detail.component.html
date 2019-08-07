@@ -1,0 +1,20 @@
+<app-sidebar></app-sidebar>
+<div class="main-panel">
+  <app-navbar></app-navbar>
+  <div class="theme-content">
+    <h3><strong>{{item?.code}}</strong></h3>
+    <hr>
+    <div class="col-md-6">
+      <p>Price per Item: <strong>{{item?.price}}</strong></p>
+      <p>Count: <strong>{{item?.count}}</strong></p>
+      <p>Coming Date: <strong>{{item?.comingDate | date}}</strong></p>
+      <p>Status: <strong>{{item?.isCompleted == true ? 'Completed' : 'In Process'}}</strong></p>
+      <p>Description: <strong>{{item?.description}}</strong></p>
+    </div>
+    <div class="col-md-6">
+      <img style="max-width: 400px" src="{{item?.photoUrl}}" onerror="this.src = 'assets/img/noimage.png';">
+    </div>
+
+  </div>
+
+</div>

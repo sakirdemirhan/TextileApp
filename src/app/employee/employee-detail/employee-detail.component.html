@@ -1,0 +1,66 @@
+<app-sidebar></app-sidebar>
+<div class="main-panel">
+  <app-navbar></app-navbar>
+  <div class="theme-content">
+    <h3><strong>{{employee?.fullName}}</strong></h3>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+
+        <p>Phone: <strong>{{employee?.phone}}</strong></p>
+        <p>Salary: <strong>{{employee?.salary}} TL</strong></p>
+        <p>Start Date: <strong>{{employee?.startDate | date}}</strong></p>
+        <p>Description: <strong>{{employee?.description}}</strong></p>
+        <p>Total Day: <strong>{{ totalWorkDays(employee?.startDate) }}</strong></p>
+        <p>Total Overtime Hours: <strong>{{ totalOvertimeHour }}</strong></p>
+        <br>
+      <button class="btn btn-info" (click)="this.ngxSmartModalService.open('addOvertimeModal');">Add Overtime</button>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3">
+            <select class="form-control" (change)="onChange($event.target.value)">
+              <option *ngFor="let i of months" value="{{i.key}}">{{i.value}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select class="form-control" (change)="onChange($event.target.value)">
+              <option *ngFor="let i of years" value="{{i}}">{{i}}</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button (click)="getEmployeeOvertimeByDate()" class="btn btn-success">List Overtime</button>
+          </div>
+        </div>
+        <div class="row">
+          <br>
+          <div class="col-md-12">
+            <p *ngIf="overtimeData.length <= 0">No overtime found between these dates.</p>
+            <p *ngFor="let i of overtimeData"><span>{{i.overtimeDay | date}} -</span> Overtime Hour: <span
+                style="font-weight: 800">{{i.hour}} hours</span> </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ngx-smart-modal #addOvertimeModal identifier="addOvertimeModal">
+
+    <form [formGroup]="formModel" autocomplete="off" (submit)="addOvertime()">
+      <div class="form-group">
+        <label>Overtime Hour</label>
+        <input type="number" class="form-control" formControlName="hour">
+      </div>
+      <div class="form-group">
+        <label>Overtime Date</label>
+        <input type="date" class="form-control" formControlName="overtimeDay">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-8 offset-md-2">
+          <button type="submit" class="btn btn-lg btn-success">Add</button>
+        </div>
+      </div>
+    </form>
+    <!-- <button (click)="addEmployeeModal.close()">Close</button> -->
+  </ngx-smart-modal>

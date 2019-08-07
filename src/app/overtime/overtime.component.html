@@ -1,0 +1,100 @@
+<app-sidebar></app-sidebar>
+<div class="main-panel">
+  <app-navbar></app-navbar>
+  <div class="theme-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="title">Overtimes</h4>
+
+                </div>
+                <div class="col-md-6">
+                  <button (click)="openAddModal()" class="btn btn-info btn-fill pull-right"><i
+                      class="fa fa-plus"></i>Add</button>
+                  <button [disabled]="selectedDatas?.length <= 1" style="margin-right: 10px"
+                    class="btn btn-danger btn-fill pull-right" (click)="openDeleteBulkModal()">Delete Bulk</button>
+                </div>
+              </div>
+            </div>
+            <div class="content table-responsive table-full-width">
+              <ag-grid-angular #agGrid style="width: 1019px; height: 650px;" class="ag-theme-material" [rowData]="overtimes"
+                [gridOptions]="gridOptions" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs"
+                rowSelection="multiple" [paginationPageSize]="10" [pagination]="true"
+                (rowSelected)="onRowSelected($event)">
+              </ag-grid-angular>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ngx-smart-modal #addOvertimeModal identifier="addOvertimeModal">
+
+  <form [formGroup]="formModel" autocomplete="off" (submit)="addOvertime()">
+    <div class="form-group">
+      <label>Employee</label>
+        <ng2-completer (selected)="onAutoCompleteSelect($event)" [inputClass]="'completer-input'" [datasource]="dataService" [minSearchLength]="1" formControlName="employeeId"></ng2-completer>
+    </div>
+    <div class="form-group">
+      <label>Hour</label>
+      <input type="number" class="form-control" formControlName="hour">
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" class="form-control" formControlName="overtimeDay">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-8 offset-md-2">
+        <button type="submit" class="btn btn-lg btn-success">Add</button>
+      </div>
+    </div>
+  </form>
+  <!-- <button (click)="addOvertimeModal.close()">Close</button> -->
+</ngx-smart-modal>
+<ngx-smart-modal #editOvertimeModal identifier="editOvertimeModal">
+
+  <form [formGroup]="formModel" autocomplete="off" (submit)="editOvertime()">
+    <div class="form-group">
+      <label>Employee</label>
+        <ng2-completer (selected)="onAutoCompleteSelect($event)" [inputClass]="'completer-input'" [datasource]="dataService" [minSearchLength]="1" formControlName="employeeId"></ng2-completer>
+    </div>
+    <div class="form-group">
+      <label>Hour</label>
+      <input type="number" class="form-control" formControlName="hour">
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" class="form-control" formControlName="overtimeDay">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-8 offset-md-2">
+        <button type="submit" class="btn btn-lg btn-success">Edit</button>
+      </div>
+    </div>
+  </form>
+  <!-- <button (click)="addOvertimeModal.close()">Close</button> -->
+</ngx-smart-modal>
+<ngx-smart-modal #deleteOvertimeModal identifier="deleteOvertimeModal">
+
+  <div *ngIf="deleteOvertimeModal.hasData()" class="alert alert-danger">
+    <h4>Are you sure to delete this overtime?</h4>
+  </div>
+  <button class="btn btn-danger btn-block" (click)="deleteOvertime(deleteOvertimeModal.getData().overtimeId)">Delete</button>
+  <button class="btn btn-block" (click)="deleteOvertimeModal.close()">Cancel</button>
+</ngx-smart-modal>
+<ngx-smart-modal #deleteBulkModal identifier="deleteBulkModal">
+
+  <div *ngIf="deleteBulkModal.hasData()" class="alert alert-danger">
+    <h4> Are you sure to delete selected expenses ?</h4>
+  </div>
+  <button class="btn btn-danger btn-block" (click)="deleteBulkOvertime(deleteBulkModal.getData())">Delete</button>
+  <button class="btn btn-block" (click)="closeBulkModal()">Cancel</button>
+</ngx-smart-modal>

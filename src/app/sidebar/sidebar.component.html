@@ -1,0 +1,62 @@
+<div class="sidebar" [attr.data-color]="selectedColor">
+
+  <!--
+
+      Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+      Tip 2: you can also add an image using data-image tag
+
+  -->
+
+    <div class="sidebar-wrapper">
+          <div class="logo" style="text-align: center;">
+              <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+                  <!-- <span (mouseover)="onMouseOver()">DemTaş</span>  -->
+                  <img src="/assets/img/logo3.png" alt="logo" style="width: 50px;">
+                  <br>
+                  <span style="font-family: initial; font-size: x-large; color: #ffffffe0; font-weight: 600;">DemTaş</span>
+              </a>
+              <!-- <div *ngIf="showColors">
+                <button style="background: #1F77D0; margin-left: 21px;" class="btn btn-fill" (click)="changeColor('blue')"></button>
+                <button style="background: #1DC7EA" class="btn btn-fill" (click)="changeColor('azure')"></button>
+                <button style="background: #87CB16" class="btn btn-fill" (click)="changeColor('green')"></button>
+                <button style="background: #FFA534" class="btn btn-fill" (click)="changeColor('orange')"></button>
+                <button style="background: #FB404B" class="btn btn-fill" (click)="changeColor('red')"></button>
+                <button style="background: #9368E9" class="btn btn-fill" (click)="changeColor('purple')"></button>
+              </div> -->
+              
+          </div>
+
+          <ul class="nav">
+              <li routerLinkActive="active">
+                  <a [routerLink]="['/dashboard']" routerLinkActive="active" >
+                      <i class="pe-7s-graph"></i>
+                      <p>Dashboard</p>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                  <a [routerLink]="['/employee']" routerLinkActive="active" >
+                      <i class="pe-7s-users"></i>
+                      <p>Employees</p>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                <a [routerLink]="['/expense']" >
+                      <i class="pe-7s-note2"></i>
+                      <p>Expenses</p>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                <a [routerLink]="['/item']">
+                    <i class="pe-7s-albums"></i>
+                      <p>Items</p>
+                  </a>
+              </li>
+              <li routerLinkActive="active">
+                <a [routerLink]="['/overtime']">
+                    <i class="pe-7s-clock"></i>
+                      <p>Overtimes</p>
+                  </a>
+              </li>
+          </ul>
+    </div>
+  </div>
