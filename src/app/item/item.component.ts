@@ -108,13 +108,13 @@ export class ItemComponent implements OnInit {
   }
 
   dateFormatter(params) {
-    const date = new DatePipe('tr-TR');
+    const date = new DatePipe('en-US');
     return date.transform(params.value);
   }
 
   currencyFormatter(params) {
     var total = params.data.price * params.data.count;
-    return `${params.value} ₺  (Total: ${total} ₺)`;
+    return `${params.value} $  (Total: ${total} $)`;
   }
 
   booleanFormatter(params) {
@@ -247,7 +247,7 @@ export class ItemComponent implements OnInit {
     } else {
       this.loading = true;
       const oldUrl = this.items.filter(x => x.itemId == this.formModel.value.itemId)[0].photoUrl;
-      this.formModel.value.photoUrl = oldUrl;
+      this.formModel.value.photoUrl = oldUrl === undefined ? null : oldUrl;
       this.itemService.editItem(this.formModel.value).then(te => {
         this.toastr.success('Item Has Edited!', 'Success.');
         this.selectedFile = null;
@@ -299,7 +299,7 @@ export class ItemComponent implements OnInit {
   }
 
   openEditModal(itemItem) {
-    let datePipe = new DatePipe('tr-TR');
+    let datePipe = new DatePipe('en-US');
     this.formModel.patchValue(
       {
         itemId: itemItem.itemId,

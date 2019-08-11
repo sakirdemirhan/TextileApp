@@ -80,13 +80,13 @@ export class ExpenseComponent implements OnInit {
   }
 
   dateFormatter(params) {
-    const date = new DatePipe('tr-TR');
+    const date = new DatePipe('en-US');
     return date.transform(params.value);
   }
 
   currencyFormatter(params) {
     var total = params.data.price * params.data.count;
-    return `${params.value} ₺`;
+    return `${params.value} $`;
   }
 
   onGridReady(params) {
@@ -182,7 +182,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   openEditModal(expense) {
-    let datePipe = new DatePipe('tr-TR');
+    let datePipe = new DatePipe('en-US');
     this.formModel.patchValue(
       {
         expenseId: expense.expenseId,

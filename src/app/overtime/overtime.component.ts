@@ -108,7 +108,7 @@ export class OvertimeComponent implements OnInit {
 
 
   dateFormatter(params) {
-    const date = new DatePipe('tr-TR');
+    const date = new DatePipe('en-US');
     return date.transform(params.value);
   }
 
@@ -120,7 +120,7 @@ export class OvertimeComponent implements OnInit {
   }
 
   currencyFormatter(params) {
-    return '₺' + params.value;
+    return '$' + params.value;
   }
 
   onGridReady(params) {
@@ -234,7 +234,7 @@ export class OvertimeComponent implements OnInit {
   }
 
   public openEditModal(overtimeItem) {
-    let datePipe = new DatePipe('tr-TR');
+    let datePipe = new DatePipe('en-US');
     this.selectedEmp = overtimeItem.employeeId;
     this.formModel.patchValue(
       {

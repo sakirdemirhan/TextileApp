@@ -99,7 +99,7 @@ const firebaseConfig = {
     //   useClass: AuthInterceptor,
     //   multi: true
     // },
-    {provide: LOCALE_ID, useValue: 'tr-TR'}
+    {provide: LOCALE_ID, useValue: 'en-US'}
   ],
   entryComponents: [EmployeeCellCustomComponent, ItemCellCustomComponent, ExpenseCellCustomComponent, OvertimeCellCustomComponent],
   bootstrap: [AppComponent]

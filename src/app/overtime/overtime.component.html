@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="content table-responsive table-full-width">
-              <ag-grid-angular #agGrid style="width: 1019px; height: 650px;" class="ag-theme-material" [rowData]="overtimes"
+              <ag-grid-angular #agGrid style="height: 650px;" class="ag-theme-material" [rowData]="overtimes"
                 [gridOptions]="gridOptions" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs"
                 rowSelection="multiple" [paginationPageSize]="10" [pagination]="true"
                 (rowSelected)="onRowSelected($event)">

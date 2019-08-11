@@ -14,6 +14,7 @@ import { OvertimeDetailComponent } from './overtime/overtime-detail/overtime-det
 import { ExpenseDetailComponent } from './expense/expense-detail/expense-detail.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/dashboard',pathMatch:'full'},
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:'expense',component:ExpenseComponent},
   {path:'expenseDetail/:id',component:ExpenseDetailComponent},
   {path:'dashboard',component:DashboardComponent},
+  {path:'menu',component:SidebarComponent},
 ];
 
 @NgModule({

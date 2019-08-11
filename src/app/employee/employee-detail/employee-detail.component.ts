@@ -25,18 +25,18 @@ export class EmployeeDetailComponent implements OnInit {
   totalOvertimeHour = 0;
   overtimeData: Overtime[] = [];
   months = [
-    { 'key': 1, 'value': 'Ocak' },
-    { 'key': 2, 'value': 'Şubat' },
-    { 'key': 3, 'value': 'Mart' },
-    { 'key': 4, 'value': 'Nisan' },
-    { 'key': 5, 'value': 'Mayıs' },
-    { 'key': 6, 'value': 'Haziran' },
-    { 'key': 7, 'value': 'Temmuz' },
-    { 'key': 8, 'value': 'Ağustos' },
-    { 'key': 9, 'value': 'Eylül' },
-    { 'key': 10, 'value': 'Ekim' },
-    { 'key': 11, 'value': 'Kasım' },
-    { 'key': 12, 'value': 'Aralık' },
+    { 'key': 1, 'value': 'January' },
+    { 'key': 2, 'value': 'February' },
+    { 'key': 3, 'value': 'March' },
+    { 'key': 4, 'value': 'April' },
+    { 'key': 5, 'value': 'May' },
+    { 'key': 6, 'value': 'June' },
+    { 'key': 7, 'value': 'July' },
+    { 'key': 8, 'value': 'August' },
+    { 'key': 9, 'value': 'September' },
+    { 'key': 10, 'value': 'October' },
+    { 'key': 11, 'value': 'November' },
+    { 'key': 12, 'value': 'December' },
   ];
   years = [];
   today = new Date();
@@ -80,7 +80,7 @@ export class EmployeeDetailComponent implements OnInit {
     if (date == null) {
       return;
     }
-    let datePipe = new DatePipe('tr-TR');
+    let datePipe = new DatePipe('en-US');
     let begin = new Date(datePipe.transform(date, 'yyyy-MM-dd'));
     let today = new Date();
     let oneDay = 24 * 60 * 60 * 1000;

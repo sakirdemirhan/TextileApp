@@ -69,12 +69,12 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   }
 
   dateFormatter(params) {
-    const date = new DatePipe('tr-TR');
+    const date = new DatePipe('en-US');
     return date.transform(params.value);
   }
 
   currencyFormatter(params) {
-    return params.value + ' ₺';
+    return params.value + ' $';
   }
 
   onGridReady(params) {
@@ -177,7 +177,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   }
 
   public openEditModal(employeeItem) {
-    let datePipe = new DatePipe('tr-TR');
+    let datePipe = new DatePipe('en-US');
     this.formModel.patchValue(
       {
         employeeId: employeeItem.employeeId,

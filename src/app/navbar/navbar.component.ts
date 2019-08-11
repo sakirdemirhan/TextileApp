@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router, ) { }
+  constructor(private router: Router, public ngxSmartModalService: NgxSmartModalService,) { }
 
   ngOnInit() {
   }
@@ -16,6 +17,10 @@ export class NavbarComponent implements OnInit {
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
+  }
+
+  onOpenMenu() {
+    this.ngxSmartModalService.open('showMenu');
   }
 
 }

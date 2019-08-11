@@ -30,7 +30,7 @@ export class OvertimeCellCustomComponent implements OnInit {
             this.employees.push(p as Employee);
           });
           const result = this.employees.filter(x => x.employeeId == this.value);
-          this.empName = result.length <= 0 ? 'Silinmiş çalışan' : result[0].fullName;
+          this.empName = result.length <= 0 ? 'Deleted Employee' : result[0].fullName;
         }
       );
     }
