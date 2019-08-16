@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ExpenseService } from '../shared/expense.service';
 import { Expense } from '../models/expense.model';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -8,13 +8,17 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { ExpenseCellCustomComponent } from './expense-cell-custom/expense-cell-custom.component';
 import { DatePipe } from '@angular/common';
+import { slider } from '../route-animations';
 
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  styleUrls: ['./expense.component.css'],
+  animations: [
+    slider
+  ],
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements OnInit, AfterViewInit {
   @ViewChild('agGrid') agGrid: AgGridNg2;
   gridOptions: any;
   gridApi: any;
@@ -26,6 +30,8 @@ export class ExpenseComponent implements OnInit {
   formModel: FormGroup;
   selectedFile: File = null;
   public loading = false;
+  isOpen = false;
+
   columnDefs = [
 
     {
@@ -35,7 +41,7 @@ export class ExpenseComponent implements OnInit {
       headerName: 'View - Edit - Delete', field: 'expenseId',
       cellRendererFramework: ExpenseCellCustomComponent
     },
-    { headerName: 'Amount',width: 150, field: 'amount', sortable: true, valueFormatter: this.currencyFormatter },
+    { headerName: 'Amount', width: 150, field: 'amount', sortable: true, valueFormatter: this.currencyFormatter },
     { headerName: 'Date', field: 'expenseDate', sortable: true, valueFormatter: this.dateFormatter },
     { headerName: 'Description', field: 'description', sortable: true },
   ];
@@ -46,7 +52,7 @@ export class ExpenseComponent implements OnInit {
     private toastr: ToastrService,
     public ngxSmartModalService: NgxSmartModalService,
     public imgMaxService: Ng2ImgMaxService,
-  ) { 
+  ) {
     this.gridOptions = {
       context: {
         componentParent: this
@@ -55,8 +61,8 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isOpen = true;
     this.refreshList();
-
     this.formModel = this.fb.group({
       expenseId: new FormControl(),
       description: new FormControl(),
@@ -65,18 +71,22 @@ export class ExpenseComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.isOpen = false;
+  }
+
   refreshList() {
     this.expenseService.getAllExpense().snapshotChanges()
-    .subscribe(
-      item => {
-        this.expenses = [];
-        item.forEach(el => {
-          var p = el.payload.toJSON();
-          p['expenseId'] = el.key;
-          this.expenses.push(p as Expense);
-        });
-      }
-    );
+      .subscribe(
+        item => {
+          this.expenses = [];
+          item.forEach(el => {
+            var p = el.payload.toJSON();
+            p['expenseId'] = el.key;
+            this.expenses.push(p as Expense);
+          });
+        }
+      );
   }
 
   dateFormatter(params) {

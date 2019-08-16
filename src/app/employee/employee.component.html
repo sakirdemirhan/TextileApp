@@ -1,7 +1,7 @@
 <app-sidebar></app-sidebar>
 <div class="main-panel">
   <app-navbar></app-navbar>
-  <div class="theme-content">
+  <div [@openClose]="isOpen ? 'open' : 'closed'" class="theme-content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">

@@ -7,11 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { EmployeeCellCustomComponent } from './employee-cell-custom/employee-cell-custom.component';
+import { slider } from '../route-animations';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  styleUrls: ['./employee.component.css'],
+  animations: [
+    slider
+  ]
 })
 export class EmployeeComponent implements OnInit, AfterViewInit {
   @ViewChild('agGrid') agGrid: AgGridNg2;
@@ -24,6 +28,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   workStartDate: Date;
   getSelectedRow: any;
   firstWarning = true;
+  isOpen = false;
   columnDefs = [
 
     {
@@ -63,9 +68,11 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
       startDate: new FormControl(),
       fullName: new FormControl()
     });
+    this.isOpen = true;
   }
 
   ngAfterViewInit() {
+    this.isOpen = false;
   }
 
   dateFormatter(params) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
@@ -9,13 +9,18 @@ import { ExpenseService } from '../shared/expense.service';
 import { Expense } from '../models/expense.model';
 import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../models/employee.model';
+import { slider } from '../route-animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    slider
+  ],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
+  
   months = ['January', 'February', 'March', 'April',
     'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   datePipe = new DatePipe('en-US');
@@ -37,6 +42,7 @@ export class DashboardComponent implements OnInit {
   expenses: Expense[];
   employees: Employee[];
   numbers: any[];
+  isOpen = false;
   constructor(
     private itemService: ItemService,
     private expenseService: ExpenseService,
@@ -44,79 +50,20 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.dashboardService.GetIncomesByMonths().subscribe(
-    //   res => {
-    //     this.incomesByMonths = res;
-    //     this.chartDataIncomesByMonths = [
-    //       { data: this.incomesByMonths, label: 'Total Incomes by Month (' + this.strYear + ')' },
-    //     ];
-    //   },
-    //   err => { }
-    // );
+    this.isOpen = true;
     this.getIncomesByMonth();
-
-    // this.dashboardService.GetCompletedItemsByMonths().subscribe(
-    //   res => {
-    //     this.itemsByMonths = res;
-    //     this.chartDataItemsByMonths = [
-    //       { data: this.itemsByMonths, label: 'Total Completed Items by Month (' + this.strYear + ')' },
-    //     ];
-    //   },
-    //   err => { }
-    // );
-
     this.getCompletedItemsByMonth();
-
-    // this.dashboardService.GetItemsOfThisMonth().subscribe(
-    //   res => {
-    //     this.completedAndOnProcessItems = res;
-    //   },
-    //   err => { }
-    // );
-
     this.getItemsOfThisMonth();
-
-    // this.dashboardService.GetIncomeAndExpenseOfThisMonth().subscribe(
-    //   res => {
-    //     this.incomesAndExpenses = res;
-    //   },
-    //   err => { }
-    // );
-
     this.getIncomesAndExpenseOfThisMonth();
-
-    // this.dashboardService.GetAllCompletedItems().subscribe(
-    //   res => {
-    //     this.totalCompletedItems = res;
-    //   },
-    //   err => { }
-    // );
-
     this.getAllCompetedItems();
-
-    // this.dashboardService.GetAllEmployees().subscribe(
-    //   res => {
-    //     this.totalEmployees = res;
-    //   },
-    //   err => { }
-    // );
-
     this.getAllEmployees();
-
-    // this.dashboardService.GetAllIncomes().subscribe(
-    //   res => {
-    //     this.totalIncomes = res;
-    //   },
-    //   err => { }
-    // );
-
     this.getAllIncomes();
-
     this.show = true;
-
   }
 
-
+  ngAfterViewInit(): void {
+    this.isOpen = false;
+  }
 
   getIncomesByMonth() {
     this.itemService.getAllItem().snapshotChanges()

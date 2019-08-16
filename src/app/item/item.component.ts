@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ItemService } from '../shared/item.service';
 import { Item } from '../models/item.model';
 import { NgxSmartModalService } from 'ngx-smart-modal';
@@ -8,13 +8,18 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { ItemCellCustomComponent } from './item-cell-custom/item-cell-custom.component';
 import { DatePipe } from '@angular/common';
+import { slider } from '../route-animations';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  styleUrls: ['./item.component.css'],
+  animations: [
+    slider
+  ],
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent implements OnInit, AfterViewInit {
+  
   @ViewChild('agGrid') agGrid: AgGridNg2;
   gridOptions: any;
   gridApi: any;
@@ -26,6 +31,7 @@ export class ItemComponent implements OnInit {
   formModel: FormGroup;
   selectedFile: File = null;
   public loading = false;
+  isOpen = false;
   columnDefs = [
 
     {
@@ -80,7 +86,6 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
     this.refreshList();
-
     this.formModel = this.fb.group({
       itemId: new FormControl(),
       code: new FormControl(),
@@ -91,6 +96,11 @@ export class ItemComponent implements OnInit {
       isCompleted: new FormControl(),
       photoUrl: new FormControl()
     });
+    this.isOpen = true;
+  }
+
+  ngAfterViewInit(): void {
+    this.isOpen = false;
   }
 
   refreshList() {

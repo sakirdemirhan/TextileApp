@@ -11,14 +11,18 @@ import { OvertimeCellCustomComponent } from './overtime-cell-custom/overtime-cel
 import { EmployeeService } from '../shared/employee.service';
 import { Employee } from '../models/employee.model';
 import { CompleterService } from 'ng2-completer';
+import { slider } from '../route-animations';
 
 @Component({
   selector: 'app-overtime',
   templateUrl: './overtime.component.html',
-  styleUrls: ['./overtime.component.css']
+  styleUrls: ['./overtime.component.css'],
+  animations: [
+    slider
+  ],
 })
-export class OvertimeComponent implements OnInit {
-
+export class OvertimeComponent implements OnInit, AfterViewInit {
+  
   @ViewChild('agGrid') agGrid: AgGridNg2;
   gridOptions: any;
   gridApi: any;
@@ -32,6 +36,7 @@ export class OvertimeComponent implements OnInit {
   dataService: any;
   firstWarning = true;
   selectedEmp: number;
+  isOpen = false;
   columnDefs = [
 
     {
@@ -69,8 +74,6 @@ export class OvertimeComponent implements OnInit {
         componentParent: this
       }
     }
-
-
   }
 
 
@@ -94,6 +97,11 @@ export class OvertimeComponent implements OnInit {
           this.dataService = this.completerService.local(this.employees, 'fullName', 'fullName');
         }
       );
+      this.isOpen = true;
+  }
+
+  ngAfterViewInit(): void {
+    this.isOpen = false;
   }
 
   onAutoCompleteSelect(data) {

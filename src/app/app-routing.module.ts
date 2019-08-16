@@ -18,28 +18,28 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/dashboard',pathMatch:'full'},
-  {
-    path: 'user', component: UserComponent,
-    children: [
-      { path: 'registration', component: RegistrationComponent },
-      { path: 'login', component: LoginComponent }
-    ]
-  },
-  {path:'home',component:HomeComponent},
-  {path:'employee',component:EmployeeComponent},
-  {path:'employeeDetail/:id',component:EmployeeDetailComponent},
-  {path:'item',component:ItemComponent},
-  {path:'itemDetail/:id',component:ItemDetailComponent},
-  {path:'overtime',component:OvertimeComponent},
-  {path:'overtimeDetail/:id',component:OvertimeDetailComponent},
-  {path:'expense',component:ExpenseComponent},
-  {path:'expenseDetail/:id',component:ExpenseDetailComponent},
-  {path:'dashboard',component:DashboardComponent},
-  {path:'menu',component:SidebarComponent},
+  // {
+  //   path: 'user', component: UserComponent,
+  //   children: [
+  //     { path: 'registration', component: RegistrationComponent },
+  //     { path: 'login', component: LoginComponent }
+  //   ]
+  // },
+  {path:'home',component:HomeComponent, data: { animation: 'isRight' }},
+  {path:'employee',component:EmployeeComponent, data: { animation: 'isRight' }},
+  {path:'employeeDetail/:id',component:EmployeeDetailComponent, data: { animation: 'isRight' }},
+  {path:'item',component:ItemComponent, data: { animation: 'isRight' }},
+  {path:'itemDetail/:id',component:ItemDetailComponent, data: { animation: 'isRight' }},
+  {path:'overtime',component:OvertimeComponent, data: { animation: 'isRight' }},
+  {path:'overtimeDetail/:id',component:OvertimeDetailComponent, data: { animation: 'isRight' }},
+  {path:'expense',component:ExpenseComponent, data: { animation: 'isRight' }},
+  {path:'expenseDetail/:id',component:ExpenseDetailComponent, data: { animation: 'isRight' }},
+  {path:'dashboard',component:DashboardComponent, data: { animation: 'isRight' }},
+  {path:'menu',component:SidebarComponent, data: { animation: 'isRight' }},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

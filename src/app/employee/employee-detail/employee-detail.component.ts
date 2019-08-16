@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { Employee } from 'src/app/models/employee.model';
@@ -9,13 +9,18 @@ import { Overtime } from 'src/app/models/overtime.model';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import * as _ from "lodash";
+import { slider } from 'src/app/route-animations';
 
 @Component({
   selector: 'app-employee-detail',
   templateUrl: './employee-detail.component.html',
-  styleUrls: ['./employee-detail.component.css']
+  styleUrls: ['./employee-detail.component.css'],
+  animations: [
+    slider
+  ]
 })
-export class EmployeeDetailComponent implements OnInit {
+export class EmployeeDetailComponent implements OnInit, AfterViewInit {
+
   id: any;
   employee: Employee;
   selectedMonth = 1;
@@ -40,6 +45,7 @@ export class EmployeeDetailComponent implements OnInit {
   ];
   years = [];
   today = new Date();
+  isOpen = false;
   constructor(
     private route: ActivatedRoute,
     private employeeService: EmployeeService,
@@ -74,6 +80,11 @@ export class EmployeeDetailComponent implements OnInit {
       hour: new FormControl(),
       employeeId: new FormControl()
     });
+    this.isOpen = true;
+  }
+
+  ngAfterViewInit(): void {
+    this.isOpen = false;
   }
 
   totalWorkDays(date: Date): number {
