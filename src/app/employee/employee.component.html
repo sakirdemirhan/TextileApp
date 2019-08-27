@@ -87,7 +87,7 @@
       <label>Description</label>
       <input type="text" class="form-control" formControlName="description">
     </div>
-    <div>
+    <div class="form-row">
       <label>Start Date</label>
       <input type="date" class="form-control" formControlName="startDate">
     </div>
@@ -102,7 +102,7 @@
 <ngx-smart-modal #deleteEmployeeModal identifier="deleteEmployeeModal">
 
   <div *ngIf="deleteEmployeeModal.hasData()" class="alert alert-danger">
-    <h4>Are you sure to delete {{deleteEmployeeModal.getData().fullName}}</h4>
+    <h4>Are you sure to delete {{deleteEmployeeModal.getData().fullName}} ?</h4>
   </div>
   <button class="btn btn-danger btn-block"
     (click)="deleteEmployee(deleteEmployeeModal.getData().employeeId)">Delete</button>

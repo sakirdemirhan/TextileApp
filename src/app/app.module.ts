@@ -40,13 +40,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DB_URL",
-  projectId: "YOUR_PROJECT_ID",
+  apiKey: "AIzaSyCOBNj0ZjX9CSwCQWSVQ_O1agzrdpBcXQk",
+  authDomain: "textileappdb.firebaseapp.com",
+  databaseURL: "https://textileappdb.firebaseio.com",
+  projectId: "textileappdb",
   storageBucket: "",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  messagingSenderId: "228891232203",
+  appId: "1:228891232203:web:4e0bd1a5a6388178"
 };
 
 @NgModule({
